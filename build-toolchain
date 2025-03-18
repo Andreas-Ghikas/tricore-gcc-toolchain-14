@@ -202,10 +202,11 @@ if [[ $* == *--newlib* || $* == *--all* ]]; then
 	export RANLIB_FOR_TARGET=$INSTALL_FOLDER/bin/tricore-elf-ranlib
 	export STRIP_FOR_TARGET=$INSTALL_FOLDER/bin/tricore-elf-strip
 	export READELF_FOR_TARGET=$INSTALL_FOLDER/bin/tricore-elf-readelf
-	if ! CFLAGS_FOR_TARGET='-g -gdwarf-3 -O2 -ffunction-sections -mfast-div -fno-common' \
-	CXXFLAGS_FOR_TARGET='-g -gdwarf-3 -O2  -ffunction-sections -mfast-div -fno-common' \
+	if ! CFLAGS_FOR_TARGET='-g -gdwarf-3 -O2 -ffunction-sections -mfast-div -fno-common -D_LDBL_EQ_DBL' \
+	CXXFLAGS_FOR_TARGET='-g -gdwarf-3 -O2  -ffunction-sections -mfast-div -fno-common -D_LDBL_EQ_DBL' \
 	$NEWLIB_SRC_FOLDER/configure \
 	--target=tricore-elf \
+	--enable-newlib-long-double-128=no \
 	--host=i686-w64-mingw32 \
 	--build=i686-pc-mingw32 \
 	--prefix=$INSTALL_FOLDER; then
@@ -244,7 +245,7 @@ if [[ $* == *--gcc-stage2* || $* == *--all* ]]; then
 	--disable-lib64 \
 	--prefix=$INSTALL_FOLDER \
 	--enable-languages=c,c++ \
-	--enable-libstdcxx-debug-flags='-gdwarf-3 -g -O0 -D_GLIBCXX_ASSERTIONS' \
+	--enable-libstdcxx-debug-flags='-gdwarf-3 -g -O0 -D_GLIBCXX_ASSERTIONS -mno-eabi-bitfield-limit' \
 	--enable-c99 \
 	--enable-long-long \
 	--enable-checking \
@@ -258,6 +259,8 @@ if [[ $* == *--gcc-stage2* || $* == *--all* ]]; then
 	--with-newlib=yes \
 	--enable-mingw-wildcard \
 	--disable-libstdcxx-pch \
+	--disable-libstdcxx-time \
+	--disable-libstdcxx-bitfields \
 	--enable-newlib-elix-level=3 \
 	--enable-newlib-io-long-long \
 	--disable-newlib-supplied-syscalls \
