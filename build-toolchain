@@ -245,7 +245,7 @@ if [[ $* == *--gcc-stage2* || $* == *--all* ]]; then
 	--disable-lib64 \
 	--prefix=$INSTALL_FOLDER \
 	--enable-languages=c,c++ \
-	--enable-libstdcxx-debug-flags='-gdwarf-3 -g -O0 -D_GLIBCXX_ASSERTIONS -mno-eabi-bitfield-limit' \
+	--enable-libstdcxx-debug-flags='-gdwarf-3 -g -O0 -D_GLIBCXX_ASSERTIONS' \
 	--enable-c99 \
 	--enable-long-long \
 	--enable-checking \
@@ -260,7 +260,6 @@ if [[ $* == *--gcc-stage2* || $* == *--all* ]]; then
 	--enable-mingw-wildcard \
 	--disable-libstdcxx-pch \
 	--disable-libstdcxx-time \
-	--disable-libstdcxx-bitfields \
 	--enable-newlib-elix-level=3 \
 	--enable-newlib-io-long-long \
 	--disable-newlib-supplied-syscalls \
